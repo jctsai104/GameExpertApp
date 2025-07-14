@@ -201,7 +201,7 @@ export default function Trading() {
                   {cryptocurrencies?.slice(0, 4).map((crypto) => {
                     const isPositive = parseFloat(crypto.change24h) > 0;
                     return (
-                      <div key={crypto.id} className="flex items-center justify-between p-3 bg-slate-50 dark:bg-dark-surface rounded-lg">
+                      <div key={crypto.id} className="flex items-center justify-between p-3 bg-slate-50 dark:bg-slate-700 rounded-lg">
                         <div className="flex items-center space-x-3">
                           <img src={crypto.icon || ""} alt={crypto.name} className="w-8 h-8 rounded-full" />
                           <div>
@@ -263,7 +263,7 @@ export default function Trading() {
               {ordersLoading ? (
                 <div className="space-y-4">
                   {[...Array(3)].map((_, i) => (
-                    <div key={i} className="flex items-center justify-between p-4 border border-slate-200 dark:border-slate-700 rounded-lg">
+                    <div key={i} className="flex items-center justify-between p-4 border border-slate-200 dark:border-slate-600 rounded-lg">
                       <Skeleton className="h-4 w-24" />
                       <Skeleton className="h-4 w-16" />
                       <Skeleton className="h-4 w-20" />
@@ -273,7 +273,7 @@ export default function Trading() {
               ) : orders && orders.length > 0 ? (
                 <div className="space-y-4">
                   {orders.map((order) => (
-                    <div key={order.id} className="flex items-center justify-between p-4 border border-slate-200 dark:border-slate-700 rounded-lg">
+                    <div key={order.id} className="flex items-center justify-between p-4 border border-slate-200 dark:border-slate-600 rounded-lg">
                       <div>
                         <p className="font-medium text-slate-900 dark:text-white">{order.type.toUpperCase()}</p>
                         <p className="text-sm text-slate-500 dark:text-slate-400">{order.amount}</p>

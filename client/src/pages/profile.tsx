@@ -138,13 +138,13 @@ export default function Profile() {
                     {showBalance ? `$${user?.totalBalance || '12,450.67'}` : '••••••'}
                   </p>
                 </div>
-                <div className="bg-slate-50 dark:bg-dark-surface rounded-lg p-4">
+                <div className="bg-slate-50 dark:bg-slate-700 rounded-lg p-4">
                   <p className="text-sm text-slate-600 dark:text-slate-400">{t('available')}</p>
                   <p className="text-2xl font-bold text-slate-900 dark:text-white">
                     {showBalance ? `$${user?.availableBalance || '8,250.30'}` : '••••••'}
                   </p>
                 </div>
-                <div className="bg-slate-50 dark:bg-dark-surface rounded-lg p-4">
+                <div className="bg-slate-50 dark:bg-slate-700 rounded-lg p-4">
                   <p className="text-sm text-slate-600 dark:text-slate-400">{t('profit_loss')}</p>
                   <p className="text-2xl font-bold text-green-500">
                     {showBalance ? '+$230.45' : '••••••'}
@@ -156,7 +156,7 @@ export default function Profile() {
               <div className="space-y-4">
                 {assetsLoading ? (
                   [...Array(3)].map((_, i) => (
-                    <div key={i} className="flex items-center justify-between p-4 border border-slate-200 dark:border-slate-700 rounded-lg">
+                    <div key={i} className="flex items-center justify-between p-4 border border-slate-200 dark:border-slate-600 rounded-lg">
                       <div className="flex items-center space-x-3">
                         <Skeleton className="w-10 h-10 rounded-full" />
                         <div>
@@ -172,7 +172,7 @@ export default function Profile() {
                   ))
                 ) : assets && assets.length > 0 ? (
                   assets.map((asset) => (
-                    <div key={asset.id} className="flex items-center justify-between p-4 border border-slate-200 dark:border-slate-700 rounded-lg hover:bg-slate-50 dark:hover:bg-dark-surface transition-colors">
+                    <div key={asset.id} className="flex items-center justify-between p-4 border border-slate-200 dark:border-slate-600 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors">
                       <div className="flex items-center space-x-3">
                         <Wallet className="w-10 h-10 text-gaming-neon" />
                         <div>
@@ -212,7 +212,7 @@ export default function Profile() {
               {transactionsLoading ? (
                 <div className="space-y-4">
                   {[...Array(5)].map((_, i) => (
-                    <div key={i} className="flex items-center justify-between p-4 border border-slate-200 dark:border-slate-700 rounded-lg">
+                    <div key={i} className="flex items-center justify-between p-4 border border-slate-200 dark:border-slate-600 rounded-lg">
                       <Skeleton className="h-4 w-20" />
                       <Skeleton className="h-4 w-16" />
                       <Skeleton className="h-4 w-24" />
@@ -223,7 +223,7 @@ export default function Profile() {
               ) : transactions && transactions.length > 0 ? (
                 <div className="space-y-4">
                   {transactions.map((tx) => (
-                    <div key={tx.id} className="flex items-center justify-between p-4 border border-slate-200 dark:border-slate-700 rounded-lg">
+                    <div key={tx.id} className="flex items-center justify-between p-4 border border-slate-200 dark:border-slate-600 rounded-lg">
                       <div className="flex items-center space-x-3">
                         <div className={`w-10 h-10 rounded-full flex items-center justify-center ${
                           tx.type === 'buy' ? 'bg-green-100 text-green-600' :
@@ -266,7 +266,7 @@ export default function Profile() {
                 <Card key={action.id} className="hover:shadow-lg transition-shadow cursor-pointer">
                   <CardContent className="p-6">
                     <div className="flex items-start space-x-4">
-                      <div className={`p-3 rounded-lg bg-slate-100 dark:bg-dark-surface ${action.color}`}>
+                      <div className={`p-3 rounded-lg bg-slate-100 dark:bg-slate-700 ${action.color}`}>
                         <IconComponent className="w-6 h-6" />
                       </div>
                       <div className="flex-1">

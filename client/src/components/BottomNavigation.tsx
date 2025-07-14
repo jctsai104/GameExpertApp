@@ -15,7 +15,7 @@ export default function BottomNavigation() {
   const [location] = useLocation();
 
   return (
-    <nav className="fixed bottom-0 left-0 right-0 bg-white/80 dark:bg-dark-card/80 backdrop-blur-lg border-t border-slate-200 dark:border-slate-700 md:hidden">
+    <nav className="fixed bottom-0 left-0 right-0 bg-white/90 dark:bg-slate-900/90 backdrop-blur-lg border-t border-slate-200 dark:border-slate-700 md:hidden">
       <div className="grid grid-cols-4 h-16">
         {navItems.map((item) => {
           const IconComponent = item.icon;

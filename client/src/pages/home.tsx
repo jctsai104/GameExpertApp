@@ -30,21 +30,21 @@ export default function Home() {
             {t('trading_features')}
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div className="bg-white/50 dark:bg-dark-card/50 backdrop-blur-sm rounded-lg p-4 text-center">
+            <div className="bg-white/50 dark:bg-slate-700/50 backdrop-blur-sm rounded-lg p-4 text-center">
               <RefreshCw className="w-8 h-8 text-gaming-neon mx-auto mb-2" />
               <h4 className="font-medium text-slate-900 dark:text-white">{t('instant_swap')}</h4>
               <p className="text-sm text-slate-600 dark:text-slate-400 mt-1">
                 {t('instant_swap_desc')}
               </p>
             </div>
-            <div className="bg-white/50 dark:bg-dark-card/50 backdrop-blur-sm rounded-lg p-4 text-center">
+            <div className="bg-white/50 dark:bg-slate-700/50 backdrop-blur-sm rounded-lg p-4 text-center">
               <Users className="w-8 h-8 text-gaming-purple mx-auto mb-2" />
               <h4 className="font-medium text-slate-900 dark:text-white">{t('c2c_trading')}</h4>
               <p className="text-sm text-slate-600 dark:text-slate-400 mt-1">
                 {t('c2c_trading_desc')}
               </p>
             </div>
-            <div className="bg-white/50 dark:bg-dark-card/50 backdrop-blur-sm rounded-lg p-4 text-center">
+            <div className="bg-white/50 dark:bg-slate-700/50 backdrop-blur-sm rounded-lg p-4 text-center">
               <TrendingUp className="w-8 h-8 text-gaming-amber mx-auto mb-2" />
               <h4 className="font-medium text-slate-900 dark:text-white">{t('market_analysis')}</h4>
               <p className="text-sm text-slate-600 dark:text-slate-400 mt-1">
@@ -60,7 +60,7 @@ export default function Home() {
         <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-4">
           {t('your_portfolio')}
         </h3>
-        <Card className="bg-white dark:bg-dark-card border-slate-200 dark:border-slate-700">
+        <Card className="bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-600">
           <CardContent className="p-6">
             <div className="flex items-center justify-between mb-6">
               <div className="flex items-center space-x-4">
@@ -84,14 +84,14 @@ export default function Home() {
             </div>
             
             <div className="grid grid-cols-2 gap-4">
-              <div className="bg-slate-50 dark:bg-dark-surface rounded-lg p-4">
+              <div className="bg-slate-50 dark:bg-slate-700 rounded-lg p-4">
                 <p className="text-sm text-slate-600 dark:text-slate-400">{t('total_balance')}</p>
                 <p className="text-2xl font-bold text-slate-900 dark:text-white">
                   ${user?.totalBalance || '12,450.67'}
                 </p>
                 <p className="text-sm text-green-500">+$230.45 (24h)</p>
               </div>
-              <div className="bg-slate-50 dark:bg-dark-surface rounded-lg p-4">
+              <div className="bg-slate-50 dark:bg-slate-700 rounded-lg p-4">
                 <p className="text-sm text-slate-600 dark:text-slate-400">{t('available')}</p>
                 <p className="text-2xl font-bold text-slate-900 dark:text-white">
                   ${user?.availableBalance || '8,250.30'}

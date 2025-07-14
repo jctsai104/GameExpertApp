@@ -12,6 +12,7 @@ import Trading from "@/pages/trading";
 import Profile from "@/pages/profile";
 import Header from "@/components/Header";
 import BottomNavigation from "@/components/BottomNavigation";
+import Footer from "@/components/Footer";
 
 function Router() {
   return (
@@ -30,11 +31,14 @@ function App() {
       <I18nextProvider i18n={i18n}>
         <ThemeProvider>
           <TooltipProvider>
-            <div className="min-h-screen bg-slate-50 dark:bg-dark-bg text-slate-900 dark:text-white transition-colors duration-300">
+            <div className="min-h-screen bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white transition-colors duration-300">
               <Header />
-              <main className="pb-20 md:pb-6">
+              <main className="pb-20 md:pb-0">
                 <Router />
               </main>
+              <div className="hidden md:block">
+                <Footer />
+              </div>
               <BottomNavigation />
               <Toaster />
             </div>

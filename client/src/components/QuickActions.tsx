@@ -51,7 +51,7 @@ export default function QuickActions() {
             <Link key={action.id} href={action.path}>
               <Button
                 variant="outline"
-                className="group flex flex-col items-center justify-center p-4 h-auto bg-white dark:bg-dark-card border-slate-200 dark:border-slate-700 hover:border-gaming-neon dark:hover:border-gaming-neon transition-all duration-300 hover:shadow-lg hover:shadow-gaming-neon/20"
+                className="group flex flex-col items-center justify-center p-4 h-auto bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-600 hover:border-gaming-neon dark:hover:border-gaming-neon transition-all duration-300 hover:shadow-lg hover:shadow-gaming-neon/20"
               >
                 <div className={`w-12 h-12 bg-gradient-to-r ${action.gradient} rounded-xl flex items-center justify-center mb-2 group-hover:animate-glow`}>
                   <IconComponent className="w-6 h-6 text-white" />

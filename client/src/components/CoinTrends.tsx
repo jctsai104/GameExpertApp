@@ -24,10 +24,10 @@ export default function CoinTrends() {
             {t('view_all')}
           </Button>
         </div>
-        <Card className="bg-white dark:bg-dark-card border-slate-200 dark:border-slate-700">
+        <Card className="bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-600">
           <CardContent className="p-0">
             {[...Array(4)].map((_, i) => (
-              <div key={i} className="flex items-center justify-between p-4 border-b border-slate-200 dark:border-slate-700 last:border-b-0">
+              <div key={i} className="flex items-center justify-between p-4 border-b border-slate-200 dark:border-slate-600 last:border-b-0">
                 <div className="flex items-center space-x-3">
                   <Skeleton className="w-10 h-10 rounded-full" />
                   <div>
@@ -58,7 +58,7 @@ export default function CoinTrends() {
         </Button>
       </div>
       
-      <Card className="bg-white dark:bg-dark-card border-slate-200 dark:border-slate-700">
+      <Card className="bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-600">
         <CardContent className="p-0">
           {cryptocurrencies?.map((coin) => {
             const isPositive = parseFloat(coin.change24h) > 0;
@@ -66,7 +66,7 @@ export default function CoinTrends() {
             const colorClass = isPositive ? 'text-green-500' : 'text-red-500';
             
             return (
-              <div key={coin.id} className="flex items-center justify-between p-4 border-b border-slate-200 dark:border-slate-700 last:border-b-0 hover:bg-slate-50 dark:hover:bg-dark-surface transition-colors">
+              <div key={coin.id} className="flex items-center justify-between p-4 border-b border-slate-200 dark:border-slate-600 last:border-b-0 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors">
                 <div className="flex items-center space-x-3">
                   <img 
                     src={coin.icon || "https://images.unsplash.com/photo-1518546305927-5a555bb7020d?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&h=100"} 

@@ -8,17 +8,22 @@ export default function Header() {
   const { t } = useTranslation();
 
   return (
-    <header className="sticky top-0 z-50 bg-white/80 dark:bg-dark-card/80 backdrop-blur-lg border-b border-slate-200 dark:border-slate-700">
+    <header className="sticky top-0 z-50 bg-white/90 dark:bg-slate-900/90 backdrop-blur-lg border-b border-slate-200 dark:border-slate-700">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <div className="flex items-center space-x-2">
-            <div className="w-8 h-8 bg-gradient-to-r from-gaming-neon to-gaming-purple rounded-lg flex items-center justify-center">
-              <Gamepad2 className="w-4 h-4 text-white" />
+          <div className="flex items-center space-x-3">
+            <div className="w-10 h-10 bg-gradient-to-r from-gaming-neon to-gaming-purple rounded-xl flex items-center justify-center shadow-lg">
+              <Gamepad2 className="w-5 h-5 text-white" />
             </div>
-            <span className="text-xl font-bold bg-gradient-to-r from-gaming-neon to-gaming-purple bg-clip-text text-transparent">
-              {t('game_expert')}
-            </span>
+            <div className="flex flex-col">
+              <span className="text-lg font-bold bg-gradient-to-r from-gaming-neon to-gaming-purple bg-clip-text text-transparent leading-tight">
+                GAME EXPERT
+              </span>
+              <span className="text-xs text-slate-500 dark:text-slate-400 leading-tight">
+                Crypto Wallet
+              </span>
+            </div>
           </div>
 
           {/* Navigation Icons */}
