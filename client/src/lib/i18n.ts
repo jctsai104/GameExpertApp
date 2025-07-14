@@ -19,7 +19,6 @@ i18n
           "buy": "Buy",
           "transfer": "Transfer",
           "sell": "Sell",
-          "orders": "Orders",
           "support": "Support",
           
           // Coin Trends
@@ -51,6 +50,8 @@ i18n
           "trading": "Trading",
           "wallet": "Wallet",
           "profile": "Profile",
+          "scan": "Scan",
+          "orders": "Orders",
           
           // Trading Page
           "deposit": "Deposit",
@@ -78,7 +79,25 @@ i18n
           "complaints": "Complaints",
           "token_swap": "Token Swap",
           "total_value": "Total Value",
-          "profit_loss": "Profit/Loss"
+          "profit_loss": "Profit/Loss",
+          
+          // Scan Page
+          "scan_qr_description": "Point your camera at a QR code to scan",
+          "camera": "Camera",
+          "upload_image": "Upload Image",
+          "recent_scans": "Recent Scans",
+          "no_recent_scans": "No recent scans",
+          
+          // Orders Page
+          "filter": "Filter",
+          "all": "All",
+          "pending": "Pending",
+          "completed": "Completed",
+          "cancelled": "Cancelled",
+          "cancel_order": "Cancel Order",
+          
+          // Header
+          "verified_user": "Verified User"
         }
       },
       "zh-TW": {
@@ -95,7 +114,6 @@ i18n
           "buy": "購買",
           "transfer": "轉帳",
           "sell": "出售",
-          "orders": "訂單",
           "support": "客服",
           
           // Coin Trends
@@ -127,6 +145,8 @@ i18n
           "trading": "交易",
           "wallet": "錢包",
           "profile": "個人資料",
+          "scan": "掃描",
+          "orders": "訂單",
           
           // Trading Page
           "deposit": "存款",
@@ -154,7 +174,25 @@ i18n
           "complaints": "投訴",
           "token_swap": "代幣兌換",
           "total_value": "總價值",
-          "profit_loss": "盈虧"
+          "profit_loss": "盈虧",
+          
+          // Scan Page
+          "scan_qr_description": "將相機對準二維碼進行掃描",
+          "camera": "相機",
+          "upload_image": "上傳圖片",
+          "recent_scans": "最近掃描",
+          "no_recent_scans": "沒有最近掃描記錄",
+          
+          // Orders Page
+          "filter": "篩選",
+          "all": "全部",
+          "pending": "待處理",
+          "completed": "已完成",
+          "cancelled": "已取消",
+          "cancel_order": "取消訂單",
+          
+          // Header
+          "verified_user": "已驗證用戶"
         }
       }
     },

@@ -1,0 +1,162 @@
+# Wallet App UI - Home, Trade & Profile Pages Specification
+
+This document outlines the UI structure and feature requirements for the **Home**, **Trade**, and **My (Profile)** pages of the Game Expert Wallet app.
+
+---
+
+## 🏠 Home Page (首頁)
+
+### ✅ Structure & Components
+
+1. **Header**
+   - Left: GAME EXPERT logo
+   - Center: UID display + badge (e.g. 普通用戶)
+   - Right:
+     - Notification bell icon
+     - Language switcher (中 / EN)
+     - Scan icon (QR scanner)
+
+2. **Asset Overview**
+   - Total asset display (e.g. ≈ 0.00 CNY / USDT)
+   - Toggle eye icon to hide/show amounts
+   - Vouchers or promo label
+
+3. **Advertisement Banner**
+   - Swipable banner (carousel)
+   - Linkable images to events or activities
+
+4. **Marquee Announcement**
+   - Horizontal scrolling text
+   - Click to open announcement center
+
+5. **Quick Action Buttons** (2 rows of 3–4 buttons)
+   - Buy (充值)
+   - Transfer (轉帳)
+   - Sell (賣幣)
+   - Orders (訂單)
+   - Customer Service (客服)
+   - Events (活動)
+   - Help (資助)
+
+6. **Daily Market Info (Ticker Area)**
+   - Display of 4–6 popular trading pairs:
+     - USDT/EB
+     - BTC/USDT
+     - ETH/USDT
+     - BNB, TRX, USDC
+   - Price & 24h change in red/green
+   - Display as cards or grid layout
+
+7. **Bottom Navigation Bar**
+   - Home
+   - Trade
+   - Scan
+   - Orders
+   - Profile
+
+---
+
+## 🔄 Trade Page (交易)
+
+### 🧩 Tab Sections
+
+1. **Swap (閃兌)**
+   - Token A → Token B conversion
+   - Input amount
+   - Auto-calculate output
+   - Real-time exchange rate
+   - Toggle swap direction
+   - "Swap now" button with countdown
+   - Recent price chart (7 days)
+
+2. **Buy / Sell (C2C)**
+   - Tabs: Buy / Sell
+   - Token selector (e.g. EB / USDT)
+   - Payment method:
+     - Bank card
+     - WeChat
+     - Alipay
+     - E-CNY
+   - Quick amount selection buttons (e.g. ¥100, ¥200)
+   - Countdown timer for refresh
+   - Sell modes:
+     - Regular sale
+     - Scheduled sale
+
+3. **Merchant Listing**
+   - List of C2C merchants
+   - Details: Avatar, name, price, amount, completion rate
+   - Purchase button
+   - Filters: price, online status, merchants
+
+4. **My Assets**
+   - Summary: total balance
+   - Actions:
+     - Swap
+     - Deposit
+     - Withdraw
+     - Transaction records
+   - Token asset list
+   - Add new token (+)
+
+---
+
+## 👤 My Page (個人頁面)
+
+### ✅ Profile Info Section
+- User avatar
+- Nickname + UID display
+- Wallet card showing:
+  - Total assets (e.g. ≈ 0.00 CNY)
+  - Wallet address with copy functionality
+  - Account verification status (实名 / 信用等级)
+
+### 📊 Asset Overview
+- Asset distribution donut chart (Available / Pending)
+- Token list: EB, USDT, BTC, ETH, TRX, etc.
+- Toggle to hide zero assets
+
+### 🧰 Quick Access Tools
+- My bills
+- My complaints
+- Payment QR / Receive
+- Identity verification
+
+### ⚙️ Settings & Support
+- Verified merchant center
+- Set payment password
+- Safety center
+- Report issue
+- Notification center
+- Share wallet app
+- Contact customer support
+
+### 💱 Optional: Currency Conversion Module
+- Reference FX rates (e.g. CNY to USD, TWD, KRW)
+- Live update time
+- Add currency option
+- Mid-market exchange rate info
+
+---
+
+## 🎨 UI Design Suggestions
+
+| Element     | Suggestion |
+|-------------|------------|
+| Color Theme | Light: #F5F7FB + #017BFF<br>Dark: #121212 + neon accents |
+| Buttons     | Rounded, bold icons with labels |
+| Cards       | Soft shadows + white/light gray background |
+| Icons       | Unified style (Tabler Icons / RemixIcon) |
+| Fonts       | Modern sans-serif (system font or Inter) |
+
+---
+
+## 🌐 Internationalization
+- i18n enabled with `react-i18next`
+- Languages: Traditional Chinese (`zh-TW`), English (`en`)
+
+---
+
+## 🌗 Dark Mode Support
+- Toggle button to switch light/dark theme
+- Tailwind `dark:` class strategy enabled

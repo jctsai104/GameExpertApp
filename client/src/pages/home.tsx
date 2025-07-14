@@ -6,11 +6,13 @@ import QuickActions from '@/components/QuickActions';
 import CoinTrends from '@/components/CoinTrends';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, RefreshCw, Users, TrendingUp } from 'lucide-react';
+import { ArrowRight, RefreshCw, Users, TrendingUp, Eye, EyeOff, Ticket } from 'lucide-react';
 import type { User } from '@shared/schema';
+import { useState } from 'react';
 
 export default function Home() {
   const { t } = useTranslation();
+  const [showBalance, setShowBalance] = useState(true);
 
   const { data: user } = useQuery<User>({
     queryKey: ['/api/users/1'],
@@ -18,6 +20,38 @@ export default function Home() {
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+      {/* Asset Overview Section */}
+      <section className="mb-6">
+        <Card className="bg-gradient-to-r from-gaming-neon/5 to-gaming-purple/5 border-gaming-neon/20">
+          <CardContent className="p-6">
+            <div className="flex items-center justify-between mb-4">
+              <div>
+                <h2 className="text-2xl font-bold text-slate-900 dark:text-white">
+                  {showBalance ? `≈ ${user?.totalBalance || '0.00'} CNY` : '≈ ••••••'}
+                </h2>
+                <p className="text-sm text-slate-600 dark:text-slate-400">
+                  {showBalance ? `/ ${user?.availableBalance || '0.00'} USDT` : '/ ••••••'}
+                </p>
+              </div>
+              <div className="flex items-center space-x-3">
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => setShowBalance(!showBalance)}
+                  className="text-slate-600 dark:text-slate-400"
+                >
+                  {showBalance ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                </Button>
+                <div className="flex items-center space-x-1 text-sm text-gaming-neon">
+                  <Ticket className="w-4 h-4" />
+                  <span>Vouchers</span>
+                </div>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      </section>
+
       <AdBanner />
       <AnnouncementMarquee />
       <QuickActions />

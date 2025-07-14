@@ -1,8 +1,9 @@
 import { useTranslation } from 'react-i18next';
-import { Bell, Gamepad2 } from 'lucide-react';
+import { Bell, Gamepad2, QrCode, Shield } from 'lucide-react';
 import LanguageSwitcher from './LanguageSwitcher';
 import ThemeToggle from './ThemeToggle';
 import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
 
 export default function Header() {
   const { t } = useTranslation();
@@ -12,22 +13,28 @@ export default function Header() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <div className="flex items-center space-x-3">
-            <div className="w-10 h-10 bg-gradient-to-r from-gaming-neon to-gaming-purple rounded-xl flex items-center justify-center shadow-lg">
-              <Gamepad2 className="w-5 h-5 text-white" />
+          <div className="flex items-center space-x-2">
+            <div className="w-8 h-8 bg-gradient-to-r from-gaming-neon to-gaming-purple rounded-lg flex items-center justify-center shadow-lg">
+              <Gamepad2 className="w-4 h-4 text-white" />
             </div>
-            <div className="flex flex-col">
-              <span className="text-lg font-bold bg-gradient-to-r from-gaming-neon to-gaming-purple bg-clip-text text-transparent leading-tight">
-                GAME EXPERT
-              </span>
-              <span className="text-xs text-slate-500 dark:text-slate-400 leading-tight">
-                Crypto Wallet
-              </span>
+            <span className="text-lg font-bold bg-gradient-to-r from-gaming-neon to-gaming-purple bg-clip-text text-transparent">
+              GAME EXPERT
+            </span>
+          </div>
+
+          {/* Center - UID and Badge (Desktop Only) */}
+          <div className="hidden md:flex items-center space-x-2">
+            <div className="text-sm text-slate-600 dark:text-slate-400">
+              UID: 123456789
             </div>
+            <Badge variant="secondary" className="bg-gaming-neon/10 text-gaming-neon border-gaming-neon/20">
+              <Shield className="w-3 h-3 mr-1" />
+              {t('verified_user')}
+            </Badge>
           </div>
 
           {/* Navigation Icons */}
-          <div className="flex items-center space-x-4">
+          <div className="flex items-center space-x-2">
             {/* Notifications */}
             <Button variant="ghost" size="icon" className="relative">
               <Bell className="w-5 h-5 text-slate-600 dark:text-slate-300" />
@@ -39,13 +46,13 @@ export default function Header() {
 
             {/* QR Scanner */}
             <Button variant="ghost" size="icon">
-              <svg className="w-5 h-5 text-slate-600 dark:text-slate-300" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M3 11h8V3H3v8zm2-6h4v4H5V5zM3 21h8v-8H3v8zm2-6h4v4H5v-4zM13 3v8h8V3h-8zm6 6h-4V5h4v4zM19 13h2v2h-2v-2zM13 13h2v2h-2v-2zM15 15h2v2h-2v-2zM13 17h2v2h-2v-2zM15 19h2v2h-2v-2zM17 17h2v2h-2v-2zM17 13h2v2h-2v-2zM19 15h2v2h-2v-2z"/>
-              </svg>
+              <QrCode className="w-5 h-5 text-slate-600 dark:text-slate-300" />
             </Button>
 
-            {/* Theme Toggle */}
-            <ThemeToggle />
+            {/* Theme Toggle - Desktop Only */}
+            <div className="hidden md:block">
+              <ThemeToggle />
+            </div>
           </div>
         </div>
       </div>

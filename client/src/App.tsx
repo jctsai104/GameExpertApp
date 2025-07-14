@@ -10,15 +10,18 @@ import NotFound from "@/pages/not-found";
 import Home from "@/pages/home";
 import Trading from "@/pages/trading";
 import Profile from "@/pages/profile";
+import Scan from "@/pages/scan";
+import Orders from "@/pages/orders";
 import Header from "@/components/Header";
 import BottomNavigation from "@/components/BottomNavigation";
-import Footer from "@/components/Footer";
 
 function Router() {
   return (
     <Switch>
       <Route path="/" component={Home} />
       <Route path="/trading" component={Trading} />
+      <Route path="/scan" component={Scan} />
+      <Route path="/orders" component={Orders} />
       <Route path="/profile" component={Profile} />
       <Route component={NotFound} />
     </Switch>
@@ -33,12 +36,9 @@ function App() {
           <TooltipProvider>
             <div className="min-h-screen bg-slate-50 dark:bg-slate-800 text-slate-900 dark:text-white transition-colors duration-300">
               <Header />
-              <main className="pb-20 md:pb-0">
+              <main className="pb-20 md:pb-6">
                 <Router />
               </main>
-              <div className="hidden md:block">
-                <Footer />
-              </div>
               <BottomNavigation />
               <Toaster />
             </div>
