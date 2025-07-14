@@ -43,7 +43,7 @@ The application uses five main entities:
 
 ## Frontend Components
 - **Header**: Navigation with logo, notifications, language switcher, and theme toggle
-- **Bottom Navigation**: Mobile-friendly tab navigation
+- **Bottom Navigation**: Mobile-friendly tab navigation with 3 tabs (首頁/交易/我的)
 - **Ad Banner**: Promotional carousel with auto-rotation
 - **Quick Actions**: Fast access to common trading operations
 - **Coin Trends**: Real-time cryptocurrency price displays
@@ -104,3 +104,17 @@ The application uses five main entities:
 - `db:push`: Apply database schema changes
 
 The application is designed to be easily deployable on platforms that support Node.js with PostgreSQL, with special consideration for Replit's development environment through custom plugins and error handling.
+
+# Recent Changes (July 14, 2025)
+
+## Navigation Updates
+- Simplified bottom navigation from 5 tabs to 3 tabs as requested
+- Removed scan and orders pages from navigation
+- Updated routing to only include: Home (首頁), Trading (交易), and Profile (我的)
+- Maintained mobile-first responsive design with proper grid layout
+
+## Home Page Enhancements
+- Added asset overview section with balance display and hide/show toggle
+- Integrated voucher system indicator
+- Maintained gaming-themed design with neon accents
+- All components follow mobile-first RWD principles

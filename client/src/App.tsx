@@ -10,8 +10,7 @@ import NotFound from "@/pages/not-found";
 import Home from "@/pages/home";
 import Trading from "@/pages/trading";
 import Profile from "@/pages/profile";
-import Scan from "@/pages/scan";
-import Orders from "@/pages/orders";
+
 import Header from "@/components/Header";
 import BottomNavigation from "@/components/BottomNavigation";
 
@@ -20,8 +19,7 @@ function Router() {
     <Switch>
       <Route path="/" component={Home} />
       <Route path="/trading" component={Trading} />
-      <Route path="/scan" component={Scan} />
-      <Route path="/orders" component={Orders} />
+
       <Route path="/profile" component={Profile} />
       <Route component={NotFound} />
     </Switch>
