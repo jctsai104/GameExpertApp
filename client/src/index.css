@@ -1,0 +1,157 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: hsl(0, 0%, 100%);
+  --foreground: hsl(20, 14.3%, 4.1%);
+  --muted: hsl(60, 4.8%, 95.9%);
+  --muted-foreground: hsl(25, 5.3%, 44.7%);
+  --popover: hsl(0, 0%, 100%);
+  --popover-foreground: hsl(20, 14.3%, 4.1%);
+  --card: hsl(0, 0%, 100%);
+  --card-foreground: hsl(20, 14.3%, 4.1%);
+  --border: hsl(20, 5.9%, 90%);
+  --input: hsl(20, 5.9%, 90%);
+  --primary: hsl(207, 90%, 54%);
+  --primary-foreground: hsl(211, 100%, 99%);
+  --secondary: hsl(60, 4.8%, 95.9%);
+  --secondary-foreground: hsl(24, 9.8%, 10%);
+  --accent: hsl(60, 4.8%, 95.9%);
+  --accent-foreground: hsl(24, 9.8%, 10%);
+  --destructive: hsl(0, 84.2%, 60.2%);
+  --destructive-foreground: hsl(60, 9.1%, 97.8%);
+  --ring: hsl(20, 14.3%, 4.1%);
+  --radius: 0.5rem;
+
+  /* Gaming theme colors */
+  --gaming-neon: hsl(189, 100%, 50%);
+  --gaming-purple: hsl(251, 91%, 67%);
+  --gaming-amber: hsl(43, 96%, 48%);
+  --dark-bg: hsl(232, 50%, 6%);
+  --dark-card: hsl(229, 39%, 16%);
+  --dark-surface: hsl(226, 57%, 21%);
+}
+
+.dark {
+  --background: hsl(232, 50%, 6%);
+  --foreground: hsl(0, 0%, 98%);
+  --muted: hsl(229, 39%, 16%);
+  --muted-foreground: hsl(240, 5%, 64.9%);
+  --popover: hsl(229, 39%, 16%);
+  --popover-foreground: hsl(0, 0%, 98%);
+  --card: hsl(229, 39%, 16%);
+  --card-foreground: hsl(0, 0%, 98%);
+  --border: hsl(226, 57%, 21%);
+  --input: hsl(226, 57%, 21%);
+  --primary: hsl(189, 100%, 50%);
+  --primary-foreground: hsl(211, 100%, 99%);
+  --secondary: hsl(229, 39%, 16%);
+  --secondary-foreground: hsl(0, 0%, 98%);
+  --accent: hsl(229, 39%, 16%);
+  --accent-foreground: hsl(0, 0%, 98%);
+  --destructive: hsl(0, 62.8%, 30.6%);
+  --destructive-foreground: hsl(0, 0%, 98%);
+  --ring: hsl(240, 4.9%, 83.9%);
+  --radius: 0.5rem;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply font-sans antialiased bg-background text-foreground;
+    font-family: 'Inter', sans-serif;
+  }
+}
+
+@layer utilities {
+  .text-gaming-neon {
+    color: var(--gaming-neon);
+  }
+  
+  .text-gaming-purple {
+    color: var(--gaming-purple);
+  }
+  
+  .text-gaming-amber {
+    color: var(--gaming-amber);
+  }
+  
+  .bg-gaming-neon {
+    background-color: var(--gaming-neon);
+  }
+  
+  .bg-gaming-purple {
+    background-color: var(--gaming-purple);
+  }
+  
+  .bg-gaming-amber {
+    background-color: var(--gaming-amber);
+  }
+  
+  .border-gaming-neon {
+    border-color: var(--gaming-neon);
+  }
+  
+  .border-gaming-purple {
+    border-color: var(--gaming-purple);
+  }
+  
+  .border-gaming-amber {
+    border-color: var(--gaming-amber);
+  }
+  
+  .bg-dark-bg {
+    background-color: var(--dark-bg);
+  }
+  
+  .bg-dark-card {
+    background-color: var(--dark-card);
+  }
+  
+  .bg-dark-surface {
+    background-color: var(--dark-surface);
+  }
+
+  .animate-glow {
+    animation: glow 2s ease-in-out infinite alternate;
+  }
+  
+  .animate-marquee {
+    animation: marquee 15s linear infinite;
+  }
+  
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+}
+
+@keyframes glow {
+  from {
+    box-shadow: 0 0 5px var(--gaming-neon);
+  }
+  to {
+    box-shadow: 0 0 20px var(--gaming-neon), 0 0 30px var(--gaming-neon);
+  }
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
