@@ -1,9 +1,17 @@
+import {
+  Bell,
+  Gamepad2,
+  QrCode,
+  Shield,
+} from 'lucide-react';
 import { useTranslation } from 'react-i18next';
-import { Bell, Gamepad2, QrCode, Shield } from 'lucide-react';
+import { Link } from 'wouter';
+
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+
 import LanguageSwitcher from './LanguageSwitcher';
 import ThemeToggle from './ThemeToggle';
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
 
 export default function Header() {
   const { t } = useTranslation();
@@ -13,14 +21,14 @@ export default function Header() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <div className="flex items-center space-x-2">
-            <div className="w-8 h-8 bg-gradient-to-r from-gaming-neon to-gaming-purple rounded-lg flex items-center justify-center shadow-lg">
+          <Link href="/" className="flex items-center space-x-2">
+            <div className="w-8 h-8 bg-gradient-to-r from-sky-400 to-violet-600 rounded-lg flex items-center justify-center shadow-lg">
               <Gamepad2 className="w-4 h-4 text-white" />
             </div>
-            <span className="text-lg font-bold bg-gradient-to-r from-gaming-neon to-gaming-purple bg-clip-text text-transparent">
+            <span className="text-lg font-bold bg-gradient-to-r from-sky-400 to-violet-600 bg-clip-text text-transparent">
               GAME EXPERT
             </span>
-          </div>
+          </Link>
 
           {/* Center - UID and Badge (Desktop Only) */}
           <div className="hidden md:flex items-center space-x-2">
@@ -49,10 +57,8 @@ export default function Header() {
               <QrCode className="w-5 h-5 text-slate-600 dark:text-slate-300" />
             </Button>
 
-            {/* Theme Toggle - Desktop Only */}
-            <div className="hidden md:block">
-              <ThemeToggle />
-            </div>
+            {/* Theme Toggle */}
+            <ThemeToggle />
           </div>
         </div>
       </div>

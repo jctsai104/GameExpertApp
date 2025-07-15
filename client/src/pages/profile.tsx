@@ -1,342 +1,329 @@
+import {
+  AlertTriangle,
+  Bell,
+  ChevronRight,
+  Copy,
+  Edit,
+  FileText,
+  Globe,
+  Lock,
+  MessageCircle,
+  Moon,
+  Share2,
+  Shield,
+  ShieldCheck,
+  Sun,
+  UserCheck,
+  Wallet,
+} from 'lucide-react';
 import { useTranslation } from 'react-i18next';
-import { useQuery } from '@tanstack/react-query';
-import { User, Settings, Shield, CreditCard, MessageCircle, RefreshCw, Wallet, TrendingUp, Eye, EyeOff } from 'lucide-react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import {
+  Cell,
+  Legend,
+  Pie,
+  PieChart,
+  ResponsiveContainer,
+} from 'recharts';
+
 import { Button } from '@/components/ui/button';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Skeleton } from '@/components/ui/skeleton';
-import { useState } from 'react';
-import type { User as UserType, UserAsset, Transaction } from '@shared/schema';
+import {
+  Card,
+  CardContent,
+} from '@/components/ui/card';
+import { useTheme } from '@/lib/theme';
+import type { User as UserType } from '@shared/schema';
+import { useQuery } from '@tanstack/react-query';
+
+// Mock data for pie chart until we have real asset distribution
+const assetData = [
+  { name: 'Available', value: 60, color: '#22c55e' },
+  { name: 'Pending', value: 25, color: '#f59e0b' },
+  { name: 'Locked', value: 15, color: '#6b7280' }
+];
+
+// Mock cryptocurrency data
+const cryptoAssets = [
+  { symbol: 'EB', name: 'EB Token', balance: '0.00', value: '≈¥0.00', icon: '🔷' },
+  { symbol: 'USDT', name: 'Tether', balance: '0.000000', value: '≈¥0.00', icon: '₮' },
+  { symbol: 'BTC', name: 'Bitcoin', balance: '0.00000000', value: '≈¥0.00', icon: '₿' },
+  { symbol: 'ETH', name: 'Ethereum', balance: '0.00000000', value: '≈¥0.00', icon: 'Ξ' },
+  { symbol: 'TRX', name: 'TRON', balance: '0.000000', value: '≈¥0.00', icon: '🟥' }
+];
 
 export default function Profile() {
-  const { t } = useTranslation();
-  const [showBalance, setShowBalance] = useState(true);
+  const { t, i18n } = useTranslation();
+  const { theme, toggleTheme } = useTheme();
 
-  const { data: user, isLoading: userLoading } = useQuery<UserType>({
+  const { data: user } = useQuery<UserType>({
     queryKey: ['/api/users/1'],
   });
 
-  const { data: assets, isLoading: assetsLoading } = useQuery<UserAsset[]>({
-    queryKey: ['/api/users/1/assets'],
-  });
+  const toggleLanguage = () => {
+    const newLang = i18n.language === 'en' ? 'zh-TW' : 'en';
+    i18n.changeLanguage(newLang);
+  };
 
-  const { data: transactions, isLoading: transactionsLoading } = useQuery<Transaction[]>({
-    queryKey: ['/api/users/1/transactions'],
-  });
+  // Quick actions items
+  const quickActions = [
+    { id: 'orders', icon: FileText, label: t('orders') },
+    { id: 'applications', icon: FileText, label: i18n.language === 'zh-TW' ? '我的申請' : 'My Applications' },
+    { id: 'collect_payments', icon: Wallet, label: i18n.language === 'zh-TW' ? '收付款' : 'Payments' },
+    { id: 'kyc_verification', icon: UserCheck, label: t('kyc_verification') }
+  ];
 
-  const profileActions = [
+  // System settings items  
+  const systemSettings = [
     { 
-      id: 'kyc_verification', 
+      id: 'merchant_verification', 
+      icon: ShieldCheck, 
+      label: i18n.language === 'zh-TW' ? '認證商家' : 'Merchant Verification', 
+      color: 'text-blue-500' 
+    },
+    { 
+      id: 'payment_password', 
+      icon: Lock, 
+      label: i18n.language === 'zh-TW' ? '支付密碼' : 'Payment Password', 
+      color: 'text-orange-500' 
+    },
+    { 
+      id: 'my_complaints', 
+      icon: AlertTriangle, 
+      label: i18n.language === 'zh-TW' ? '我的舉報' : 'My Reports', 
+      color: 'text-red-500' 
+    },
+    { 
+      id: 'security_center', 
       icon: Shield, 
-      color: 'text-green-500',
-      description: 'Verify your identity to unlock all features'
+      label: i18n.language === 'zh-TW' ? '安全中心' : 'Security Center', 
+      color: 'text-green-500' 
     },
     { 
-      id: 'security', 
-      icon: Settings, 
-      color: 'text-blue-500',
-      description: 'Manage your account security settings'
+      id: 'notification_center', 
+      icon: Bell, 
+      label: i18n.language === 'zh-TW' ? '通知中心' : 'Notification Center', 
+      color: 'text-red-500' 
     },
-    { 
-      id: 'billing', 
-      icon: CreditCard, 
+    {
+      id: 'language_toggle',
+      icon: Globe,
+      label: i18n.language === 'zh-TW' ? '切換語言 (English)' : 'Switch Language (中文)',
       color: 'text-purple-500',
-      description: 'View your billing and payment history'
+      action: toggleLanguage
     },
-    { 
-      id: 'complaints', 
-      icon: MessageCircle, 
-      color: 'text-orange-500',
-      description: 'Submit and track support tickets'
-    },
-    { 
-      id: 'token_swap', 
-      icon: RefreshCw, 
-      color: 'text-gaming-neon',
-      description: 'Swap between different cryptocurrencies'
+    {
+      id: 'theme_toggle',
+      icon: theme === 'dark' ? Sun : Moon,
+      label: i18n.language === 'zh-TW' 
+        ? (theme === 'dark' ? '切換亮色模式' : '切換深色模式')
+        : (theme === 'dark' ? 'Switch to Light Mode' : 'Switch to Dark Mode'),
+      color: 'text-indigo-500',
+      action: toggleTheme
     }
   ];
 
-  if (userLoading) {
-    return (
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-        <Card className="mb-6">
-          <CardContent className="p-6">
-            <div className="flex items-center space-x-4">
-              <Skeleton className="w-16 h-16 rounded-full" />
-              <div className="space-y-2">
-                <Skeleton className="h-6 w-32" />
-                <Skeleton className="h-4 w-24" />
+  return (
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 bg-slate-50 dark:bg-slate-950">
+      <div className="max-w-sm mx-auto px-3 sm:max-w-none sm:px-4 py-4 sm:py-6 space-y-3 sm:space-y-4">
+        {/* Avatar + UID Card */}
+        <Card className="bg-gradient-to-r from-blue-500 to-blue-600 text-white shadow-lg">
+          <CardContent className="p-4 sm:p-6">
+          <div className="flex items-center justify-between mb-3 sm:mb-4">
+            <div className="flex items-center space-x-2 sm:space-x-3">
+              <div className="w-10 h-10 sm:w-12 sm:h-12 bg-white/20 rounded-full flex items-center justify-center">
+                <span className="text-base sm:text-lg">👤</span>
               </div>
+              <div>
+                <h2 className="font-semibold text-sm sm:text-base">
+                  {user ? `${user.firstName || ''} ${user.lastName || ''}`.trim() || 'BT機器貓 djoa' : 'BT機器貓 djoa'}
+                </h2>
+                <p className="text-xs sm:text-sm opacity-90">
+                  {i18n.language === 'zh-TW' ? 'ID: ' : 'UID: '}{user?.id ? user.id.toString().padStart(8, '0') : '25844722'}
+                </p>
+              </div>
+            </div>
+            <Button 
+              variant="ghost" 
+              size="sm" 
+              className="text-white hover:bg-white/20"
+            >
+              <Edit className="w-4 h-4" />
+            </Button>
+          </div>
+          
+          <div className="bg-white/10 rounded-lg p-3 sm:p-4">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-2 space-y-1 sm:space-y-0">
+              <span className="text-xs sm:text-sm font-medium">
+                {i18n.language === 'zh-TW' ? '錢包資產' : 'Wallet Assets'}
+              </span>
+              <div className="flex flex-wrap items-center gap-1 sm:gap-2 text-xs">
+                <span className="text-orange-300">
+                  ✓ {i18n.language === 'zh-TW' ? '信用中等' : 'Medium Credit'}
+                </span>
+                <span className="text-gray-300">
+                  ⚫ {i18n.language === 'zh-TW' ? '暫未實名' : 'Not Verified'}
+                </span>
+                <span className="text-gray-300 hidden sm:inline">
+                  ⚫ {i18n.language === 'zh-TW' ? '暫未綁定' : 'Not Linked'}
+                </span>
+              </div>
+            </div>
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-2 sm:space-y-0">
+              <div>
+                <p className="text-xl sm:text-2xl font-bold">0.00</p>
+                <p className="text-xs sm:text-sm opacity-90">≈ 0.00 CNY</p>
+              </div>
+              <div className="flex items-center space-x-1 sm:space-x-2">
+                <span className="text-xs bg-white/20 px-2 py-1 rounded truncate max-w-[120px] sm:max-w-none">
+                  B8b2044f0a5668eeb924919251ab21571
+                </span>
+                <Button variant="ghost" size="sm" className="text-white p-1 flex-shrink-0">
+                  <Copy className="w-3 h-3 sm:w-4 sm:h-4" />
+                </Button>
+              </div>
+            </div>
+          </div>
+          </CardContent>
+        </Card>
+
+        {/* Asset Distribution Pie Chart */}
+        <Card className="shadow-sm">
+          <CardContent className="p-3 sm:p-4">
+          <div className="flex items-center justify-between mb-3 sm:mb-4">
+            <h3 className="font-semibold text-sm sm:text-base text-slate-900 dark:text-white">
+              {i18n.language === 'zh-TW' ? '資產分布' : 'Asset Distribution'}
+            </h3>
+          </div>
+          <div className="h-40 sm:h-48">
+            <ResponsiveContainer width="100%" height="100%">
+              <PieChart>
+                <Pie
+                  data={assetData}
+                  cx="50%"
+                  cy="50%"
+                  innerRadius={30}
+                  outerRadius={60}
+                  paddingAngle={5}
+                  dataKey="value"
+                >
+                  {assetData.map((entry, index) => (
+                    <Cell key={`cell-${index}`} fill={entry.color} />
+                  ))}
+                </Pie>
+                <Legend />
+              </PieChart>
+            </ResponsiveContainer>
+          </div>
+          <div className="flex justify-between text-xs sm:text-sm mt-3 sm:mt-4">
+            <div className="text-center">
+              <p className="text-green-500 font-semibold">
+                {i18n.language === 'zh-TW' ? '可用' : 'Available'}
+              </p>
+              <p className="text-slate-600 dark:text-slate-400">≈¥0.00</p>
+            </div>
+            <div className="text-center">
+              <p className="text-orange-500 font-semibold">
+                {i18n.language === 'zh-TW' ? '待結算' : 'Pending'}
+              </p>
+              <p className="text-slate-600 dark:text-slate-400">≈¥0.00</p>
+            </div>
+          </div>
+          </CardContent>
+        </Card>
+
+        {/* Cryptocurrency List */}
+        <Card className="shadow-sm">
+          <CardContent className="p-3 sm:p-4">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-3 sm:mb-4 space-y-1 sm:space-y-0">
+              <h3 className="font-semibold text-sm sm:text-base text-slate-900 dark:text-white">
+                {i18n.language === 'zh-TW' ? '資產列表' : 'Asset List'}
+              </h3>
+              <span className="text-xs sm:text-sm text-slate-500">
+                {i18n.language === 'zh-TW' ? '隱藏零持有的資產' : 'Hide zero balance assets'}
+              </span>
+            </div>
+            <div className="space-y-2 sm:space-y-3">
+              {cryptoAssets.map((crypto) => (
+                <div key={crypto.symbol} className="flex items-center justify-between p-2 sm:p-3 bg-slate-50 dark:bg-slate-800 rounded-lg">
+                  <div className="flex items-center space-x-2 sm:space-x-3">
+                    <div className="w-6 h-6 sm:w-8 sm:h-8 flex items-center justify-center text-base sm:text-lg">
+                      {crypto.icon}
+                    </div>
+                    <div>
+                      <p className="font-medium text-xs sm:text-sm text-slate-900 dark:text-white">{crypto.symbol}</p>
+                      <p className="text-xs text-slate-500">{crypto.name}</p>
+                    </div>
+                  </div>
+                  <div className="text-right">
+                    <p className="font-medium text-xs sm:text-sm text-slate-900 dark:text-white">{crypto.balance}</p>
+                    <p className="text-xs text-slate-500">{crypto.value}</p>
+                  </div>
+                </div>
+              ))}
             </div>
           </CardContent>
         </Card>
-      </div>
-    );
-  }
 
-  return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-      {/* Profile Header */}
-      <Card className="mb-6">
-        <CardContent className="p-6">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-4">
-              <img 
-                src={user?.avatar || "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&h=100"}
-                alt="User Avatar" 
-                className="w-16 h-16 rounded-full border-2 border-gaming-neon"
-              />
-              <div>
-                <h1 className="text-2xl font-bold text-slate-900 dark:text-white">
-                  {user ? `${user.firstName} ${user.lastName}` : 'Alex Chen'}
-                </h1>
-                <p className="text-slate-500 dark:text-slate-400">
-                  ID: {user?.id ? `GE${user.id.toString().padStart(7, '0')}` : 'GE2024001'}
-                </p>
-                <p className="text-sm text-slate-500 dark:text-slate-400">
-                  {user?.email || 'alex.chen@gameexpert.com'}
-                </p>
-              </div>
-            </div>
-            <Button variant="outline" className="border-gaming-neon text-gaming-neon hover:bg-gaming-neon hover:text-white">
-              <User className="w-4 h-4 mr-2" />
-              Edit Profile
-            </Button>
-          </div>
-        </CardContent>
-      </Card>
+        {/* Quick Actions */}
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-4">
+          {quickActions.map((action) => {
+            const IconComponent = action.icon;
+            return (
+              <Button
+                key={action.id}
+                variant="ghost"
+                className="flex flex-col items-center p-3 sm:p-4 h-auto bg-slate-50 dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700"
+              >
+                <IconComponent className="w-5 h-5 sm:w-6 sm:h-6 mb-1 sm:mb-2 text-slate-600 dark:text-slate-400" />
+                <span className="text-xs text-slate-600 dark:text-slate-400 text-center leading-tight">
+                  {action.label}
+                </span>
+              </Button>
+            );
+          })}
+        </div>
 
-      <Tabs defaultValue="assets" className="space-y-6">
-        <TabsList className="grid w-full grid-cols-4">
-          <TabsTrigger value="assets">{t('assets')}</TabsTrigger>
-          <TabsTrigger value="transactions">{t('transactions')}</TabsTrigger>
-          <TabsTrigger value="settings">{t('settings')}</TabsTrigger>
-          <TabsTrigger value="overview">Overview</TabsTrigger>
-        </TabsList>
-
-        <TabsContent value="assets">
-          {/* Asset Overview */}
-          <Card className="mb-6">
-            <CardHeader>
-              <CardTitle className="flex items-center justify-between">
-                <span>{t('asset_overview')}</span>
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  onClick={() => setShowBalance(!showBalance)}
-                >
-                  {showBalance ? <Eye className="w-4 h-4" /> : <EyeOff className="w-4 h-4" />}
-                </Button>
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-                <div className="bg-gradient-to-r from-gaming-neon/10 to-gaming-purple/10 rounded-lg p-4">
-                  <p className="text-sm text-slate-600 dark:text-slate-400">{t('total_value')}</p>
-                  <p className="text-2xl font-bold text-slate-900 dark:text-white">
-                    {showBalance ? `$${user?.totalBalance || '12,450.67'}` : '••••••'}
-                  </p>
-                </div>
-                <div className="bg-slate-50 dark:bg-slate-700 rounded-lg p-4">
-                  <p className="text-sm text-slate-600 dark:text-slate-400">{t('available')}</p>
-                  <p className="text-2xl font-bold text-slate-900 dark:text-white">
-                    {showBalance ? `$${user?.availableBalance || '8,250.30'}` : '••••••'}
-                  </p>
-                </div>
-                <div className="bg-slate-50 dark:bg-slate-700 rounded-lg p-4">
-                  <p className="text-sm text-slate-600 dark:text-slate-400">{t('profit_loss')}</p>
-                  <p className="text-2xl font-bold text-green-500">
-                    {showBalance ? '+$230.45' : '••••••'}
-                  </p>
-                </div>
-              </div>
-
-              {/* Asset List */}
-              <div className="space-y-4">
-                {assetsLoading ? (
-                  [...Array(3)].map((_, i) => (
-                    <div key={i} className="flex items-center justify-between p-4 border border-slate-200 dark:border-slate-600 rounded-lg">
-                      <div className="flex items-center space-x-3">
-                        <Skeleton className="w-10 h-10 rounded-full" />
-                        <div>
-                          <Skeleton className="h-4 w-16 mb-1" />
-                          <Skeleton className="h-3 w-12" />
-                        </div>
-                      </div>
-                      <div className="text-right">
-                        <Skeleton className="h-4 w-20 mb-1" />
-                        <Skeleton className="h-3 w-16" />
-                      </div>
-                    </div>
-                  ))
-                ) : assets && assets.length > 0 ? (
-                  assets.map((asset) => (
-                    <div key={asset.id} className="flex items-center justify-between p-4 border border-slate-200 dark:border-slate-600 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors">
-                      <div className="flex items-center space-x-3">
-                        <Wallet className="w-10 h-10 text-gaming-neon" />
-                        <div>
-                          <p className="font-medium text-slate-900 dark:text-white">Asset #{asset.id}</p>
-                          <p className="text-sm text-slate-500 dark:text-slate-400">Balance: {asset.balance}</p>
-                        </div>
-                      </div>
-                      <div className="text-right">
-                        <p className="font-medium text-slate-900 dark:text-white">
-                          {showBalance ? asset.balance : '••••••'}
-                        </p>
-                        <p className="text-sm text-slate-500 dark:text-slate-400">
-                          Locked: {showBalance ? asset.lockedBalance || '0' : '••••••'}
-                        </p>
-                      </div>
-                    </div>
-                  ))
-                ) : (
-                  <div className="text-center py-8">
-                    <Wallet className="w-12 h-12 text-slate-400 mx-auto mb-4" />
-                    <p className="text-slate-600 dark:text-slate-400">
-                      No assets found. Start trading to build your portfolio.
-                    </p>
-                  </div>
-                )}
-              </div>
-            </CardContent>
-          </Card>
-        </TabsContent>
-
-        <TabsContent value="transactions">
-          <Card>
-            <CardHeader>
-              <CardTitle>{t('transactions')}</CardTitle>
-            </CardHeader>
-            <CardContent>
-              {transactionsLoading ? (
-                <div className="space-y-4">
-                  {[...Array(5)].map((_, i) => (
-                    <div key={i} className="flex items-center justify-between p-4 border border-slate-200 dark:border-slate-600 rounded-lg">
-                      <Skeleton className="h-4 w-20" />
-                      <Skeleton className="h-4 w-16" />
-                      <Skeleton className="h-4 w-24" />
-                      <Skeleton className="h-4 w-12" />
-                    </div>
-                  ))}
-                </div>
-              ) : transactions && transactions.length > 0 ? (
-                <div className="space-y-4">
-                  {transactions.map((tx) => (
-                    <div key={tx.id} className="flex items-center justify-between p-4 border border-slate-200 dark:border-slate-600 rounded-lg">
-                      <div className="flex items-center space-x-3">
-                        <div className={`w-10 h-10 rounded-full flex items-center justify-center ${
-                          tx.type === 'buy' ? 'bg-green-100 text-green-600' :
-                          tx.type === 'sell' ? 'bg-red-100 text-red-600' :
-                          'bg-blue-100 text-blue-600'
-                        }`}>
-                          <TrendingUp className="w-5 h-5" />
-                        </div>
-                        <div>
-                          <p className="font-medium text-slate-900 dark:text-white capitalize">{tx.type}</p>
-                          <p className="text-sm text-slate-500 dark:text-slate-400">
-                            {tx.createdAt ? new Date(tx.createdAt).toLocaleDateString() : 'N/A'}
-                          </p>
-                        </div>
-                      </div>
-                      <div className="text-right">
-                        <p className="font-medium text-slate-900 dark:text-white">{tx.amount}</p>
-                        <p className="text-sm text-slate-500 dark:text-slate-400">{tx.status}</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              ) : (
-                <div className="text-center py-8">
-                  <TrendingUp className="w-12 h-12 text-slate-400 mx-auto mb-4" />
-                  <p className="text-slate-600 dark:text-slate-400">
-                    No transactions found. Your transaction history will appear here.
-                  </p>
-                </div>
-              )}
-            </CardContent>
-          </Card>
-        </TabsContent>
-
-        <TabsContent value="settings">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {profileActions.map((action) => {
-              const IconComponent = action.icon;
+        {/* System Settings */}
+        <Card className="shadow-sm">
+          <CardContent className="p-0">
+          <div className="divide-y divide-slate-200 dark:divide-slate-700">
+            {systemSettings.map((setting) => {
+              const IconComponent = setting.icon;
               return (
-                <Card key={action.id} className="hover:shadow-lg transition-shadow cursor-pointer">
-                  <CardContent className="p-6">
-                    <div className="flex items-start space-x-4">
-                      <div className={`p-3 rounded-lg bg-slate-100 dark:bg-slate-700 ${action.color}`}>
-                        <IconComponent className="w-6 h-6" />
-                      </div>
-                      <div className="flex-1">
-                        <h3 className="font-semibold text-slate-900 dark:text-white mb-2">
-                          {t(action.id)}
-                        </h3>
-                        <p className="text-sm text-slate-600 dark:text-slate-400">
-                          {action.description}
-                        </p>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
+                <button
+                  key={setting.id}
+                  onClick={setting.action || (() => {})}
+                  className="w-full flex items-center justify-between p-3 sm:p-4 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors"
+                >
+                  <div className="flex items-center space-x-2 sm:space-x-3">
+                    <IconComponent className={`w-4 h-4 sm:w-5 sm:h-5 ${setting.color}`} />
+                    <span className="text-sm sm:text-base text-slate-900 dark:text-white">{setting.label}</span>
+                  </div>
+                  <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5 text-slate-400" />
+                </button>
               );
             })}
           </div>
-        </TabsContent>
+          </CardContent>
+        </Card>
 
-        <TabsContent value="overview">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            <Card>
-              <CardHeader>
-                <CardTitle>Account Summary</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-4">
-                  <div className="flex justify-between">
-                    <span className="text-slate-600 dark:text-slate-400">Member Since</span>
-                    <span className="font-medium">January 2024</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-slate-600 dark:text-slate-400">Account Type</span>
-                    <span className="font-medium">Premium</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-slate-600 dark:text-slate-400">KYC Status</span>
-                    <span className="font-medium text-green-500">Verified</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-slate-600 dark:text-slate-400">2FA Enabled</span>
-                    <span className="font-medium text-green-500">Yes</span>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardHeader>
-                <CardTitle>Quick Actions</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="grid grid-cols-2 gap-3">
-                  <Button className="bg-gaming-neon hover:bg-gaming-neon/80 text-white">
-                    {t('transfer')}
-                  </Button>
-                  <Button className="bg-gaming-purple hover:bg-gaming-purple/80 text-white">
-                    {t('receive')}
-                  </Button>
-                  <Button variant="outline" className="border-gaming-neon text-gaming-neon hover:bg-gaming-neon hover:text-white">
-                    {t('buy')}
-                  </Button>
-                  <Button variant="outline" className="border-gaming-purple text-gaming-purple hover:bg-gaming-purple hover:text-white">
-                    {t('sell')}
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-        </TabsContent>
-      </Tabs>
+        {/* Contact Support / Share App */}
+        <div className="grid grid-cols-2 gap-3 sm:gap-4">
+          <Button 
+            variant="ghost" 
+            className="flex flex-col sm:flex-row items-center space-y-1 sm:space-y-0 sm:space-x-2 p-3 sm:p-4 bg-slate-50 dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700"
+          >
+            <Share2 className="w-4 h-4 sm:w-5 sm:h-5 text-blue-500" />
+            <span className="text-xs sm:text-sm text-center">{i18n.language === 'zh-TW' ? '分享錢包' : 'Share Wallet'}</span>
+          </Button>
+          <Button 
+            variant="ghost" 
+            className="flex flex-col sm:flex-row items-center space-y-1 sm:space-y-0 sm:space-x-2 p-3 sm:p-4 bg-slate-50 dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700"
+          >
+            <MessageCircle className="w-4 h-4 sm:w-5 sm:h-5 text-orange-500" />
+            <span className="text-xs sm:text-sm text-center">{i18n.language === 'zh-TW' ? '聯繫客服' : 'Contact Support'}</span>
+          </Button>
+        </div>
+      </div>
     </div>
   );
 }

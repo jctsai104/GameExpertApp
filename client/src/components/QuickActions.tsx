@@ -1,37 +1,44 @@
+import {
+  DollarSign,
+  Headphones,
+  List,
+  Send,
+  ShoppingCart,
+} from 'lucide-react';
 import { useTranslation } from 'react-i18next';
-import { ShoppingCart, Send, DollarSign, List, Headphones } from 'lucide-react';
-import { Button } from '@/components/ui/button';
 import { Link } from 'wouter';
+
+import { Button } from '@/components/ui/button';
 
 const quickActions = [
   {
     id: 'buy',
     icon: ShoppingCart,
-    gradient: 'from-gaming-neon to-gaming-purple',
+    gradient: 'from-pink-500 via-fuchsia-500 to-purple-600',
     path: '/trading'
   },
   {
     id: 'transfer',
     icon: Send,
-    gradient: 'from-gaming-purple to-gaming-neon',
+    gradient: 'from-cyan-400 via-blue-500 to-indigo-600',
     path: '/transfer'
   },
   {
     id: 'sell',
     icon: DollarSign,
-    gradient: 'from-emerald-500 to-gaming-neon',
+    gradient: 'from-yellow-400 via-amber-500 to-orange-500',
     path: '/trading'
   },
   {
     id: 'orders',
     icon: List,
-    gradient: 'from-gaming-amber to-orange-500',
+    gradient: 'from-rose-400 via-pink-500 to-fuchsia-600',
     path: '/orders'
   },
   {
     id: 'support',
     icon: Headphones,
-    gradient: 'from-blue-500 to-gaming-purple',
+    gradient: 'from-sky-400 via-indigo-500 to-purple-600',
     path: '/support'
   }
 ];
@@ -44,7 +51,7 @@ export default function QuickActions() {
       <h3 className="text-lg font-semibold mb-4 text-slate-900 dark:text-white">
         {t('quick_actions')}
       </h3>
-      <div className="grid grid-cols-5 gap-4">
+      <div className="flex overflow-x-auto md:overflow-visible gap-4 md:justify-between px-1 hide-scrollbar">
         {quickActions.map((action) => {
           const IconComponent = action.icon;
           return (

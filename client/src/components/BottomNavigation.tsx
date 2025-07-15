@@ -1,6 +1,14 @@
+import {
+  Home,
+  TrendingUp,
+  User,
+} from 'lucide-react';
 import { useTranslation } from 'react-i18next';
-import { Home, TrendingUp, User } from 'lucide-react';
-import { Link, useLocation } from 'wouter';
+import {
+  Link,
+  useLocation,
+} from 'wouter';
+
 import { Button } from '@/components/ui/button';
 
 const navItems = [
@@ -21,12 +29,12 @@ export default function BottomNavigation() {
           const isActive = location === item.path;
           
           return (
-            <Link key={item.id} href={item.path}>
+            <Link key={item.id} href={item.path} className="flex items-center justify-center">
               <Button
                 variant="ghost"
                 className={`flex flex-col items-center justify-center space-y-1 h-full rounded-none ${
                   isActive 
-                    ? 'text-gaming-neon' 
+                    ? 'text-sky-400' 
                     : 'text-slate-500 dark:text-slate-400'
                 }`}
               >
