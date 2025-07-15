@@ -11,7 +11,6 @@ import {
   Download,
   Plus,
   RefreshCw,
-  RotateCcw,
   Smartphone,
   Upload,
   User,
@@ -265,7 +264,7 @@ export default function Trading() {
                     onClick={toggleSwapDirection}
                     className="rounded-full bg-blue-500 hover:bg-blue-600 text-white border-0 shadow-lg"
                   >
-                    <RotateCcw className="w-4 h-4" />
+                    <ArrowUpDown className="w-4 h-4" />
                   </Button>
                 </div>
 
@@ -529,13 +528,16 @@ export default function Trading() {
                           </div>
                         </div>
                       </div>
-                      <div className="text-right">
-                        <div className="text-sm font-medium">{merchant.amount} BOB</div>
-                        <div className="text-xs text-slate-500">{merchant.price} {i18n.language === 'zh-TW' ? '單價' : 'per unit'}</div>
-                      </div>
-                      <Button size="sm" className="bg-blue-500 text-white text-xs">
+                      <div className="flex flex-col md:flex-row md:items-center items-start space-x-2">
+                        <div className="flex flex-col">
+                          <div className="text-xs md:text-sm font-medium">{merchant.amount} BOB</div>
+                          <div className="text-[10px] md:text-xs text-slate-500">{merchant.price} {i18n.language === 'zh-TW' ? '單價' : 'per unit'}</div>
+                        </div>
+                        <Button size="sm" className="bg-blue-500 text-white text-xs">
                         {i18n.language === 'zh-TW' ? '購買' : 'Buy'}
                       </Button>
+                      </div>
+
                     </div>
                   ))}
                 </div>
