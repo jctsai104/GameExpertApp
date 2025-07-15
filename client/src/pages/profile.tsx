@@ -122,7 +122,7 @@ export default function Profile() {
   ];
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 bg-slate-50 dark:bg-slate-950">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
       <div className="max-w-sm mx-auto px-3 sm:max-w-none sm:px-4 py-4 sm:py-6 space-y-3 sm:space-y-4">
         {/* Avatar + UID Card */}
         <Card className="bg-gradient-to-r from-blue-500 to-blue-600 text-white shadow-lg">
